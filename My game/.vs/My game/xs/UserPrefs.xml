@@ -1,0 +1,25 @@
+﻿<Properties StartupConfiguration="{7E6CDFE0-F0A8-526C-E40B-6F35F6A071D1}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Clicker.cs">
+    <Files>
+      <File FileName="Assets/Clicker.cs" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="My game" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Clicker.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="98790223-aa09-4ec8-813e-f0680c447560" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
