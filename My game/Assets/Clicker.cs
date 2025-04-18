@@ -1,14 +1,27 @@
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
 public class Clicker : MonoBehaviour
 {
-    public Text coinText; 
-    private int coinCount = 0; 
+    public Text scoreText;  
+    public int score = 0;  
+    public int clickValue = 1; 
+
+    void Start()
+    {
+        
+        if (scoreText == null)
+        {
+            Debug.LogError("Score Text is not assigned in the Inspector");
+        }
+    }
+
     public void OnClick()
     {
-        coinCount++; 
-        coinText.text = "Coins: " + coinCount; 
+        score += clickValue;
+        scoreText.text = "Coins: " + score;
     }
 }
+
+
 

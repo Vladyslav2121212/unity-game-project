@@ -1,59 +1,53 @@
-using System.Collections;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class AutoClicker : MonoBehaviour
 {
-    public Button autoClickerButton;
-    public Button clickButton;
-    public Text scoreText;
-
-    private bool isAutoClicking = false;
-
-    void Start()
-    {
-        autoClickerButton.onClick.AddListener(ActivateAutoClicker);
-        autoClickerButton.interactable = false;
-    }
+    public Clicker clicker;  
+    public int coinsRequired = 20; 
+    public float autoClickInterval = 1f; 
+    private bool isAutoClickerActive = false;
+    private float lastClickTime = 0f; 
 
     void Update()
     {
-        int currentScore = ExtractScore(scoreText.text);
-        if (currentScore >= 20 && !isAutoClicking)
+        
+        if (clicker.score >= coinsRequired && !isAutoClickerActive)
         {
-            autoClickerButton.interactable = true;
+            ActivateAutoClicker();
+        }
+
+        
+        if (isAutoClickerActive)
+        {
+            if (Time.time - lastClickTime >= autoClickInterval)
+            {
+                AutoClick();
+            }
         }
     }
 
     void ActivateAutoClicker()
     {
-        if (!isAutoClicking)
-        {
-            isAutoClicking = true;
-            autoClickerButton.interactable = false;
-            StartCoroutine(AutoClick());
-        }
+       
+        isAutoClickerActive = true;
+        Debug.Log("Auto Clicker Activated!");
     }
 
-    IEnumerator AutoClick()
+    void AutoClick()
     {
-        while (true)
-        {
-            clickButton.onClick.Invoke();
-            yield return new WaitForSeconds(1f); // 1 раз в секунду
-        }
+       
+        clicker.OnClick();
+        lastClickTime = Time.time;  
     }
 
-    int ExtractScore(string rawText)
+    
+    public void DeactivateAutoClicker()
     {
-        string digitsOnly = new string(rawText.Where(char.IsDigit).ToArray());
-
-        if (int.TryParse(digitsOnly, out int result))
-            return result;
-        else
-            return 0;
+        isAutoClickerActive = false;
+        Debug.Log("Auto Clicker Deactivated!");
     }
 }
+
+
 
 
