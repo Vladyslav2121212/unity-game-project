@@ -6,9 +6,14 @@ public class Clicker : MonoBehaviour
 {
     public Text scoreText;
     public Text statsText;
+    public AudioClip clickSound;  
+    public AudioClip upgradeSound;  
+    public AudioClip criticalClickSound;  
+
+    private AudioSource audioSource;
+
     public int score = 0;
     public int clickValue = 1;
-
     private int totalClicks = 0;
     private float startTime;
 
@@ -22,6 +27,14 @@ public class Clicker : MonoBehaviour
             return;
         }
 
+        if (clickSound == null || upgradeSound == null || criticalClickSound == null)
+        {
+            Debug.LogError("Звуки не призначено в інспекторі");
+            return;
+        }
+
+        audioSource = GetComponent<AudioSource>();  
+
         startTime = Time.time;
         UpdateUI();
     }
@@ -31,9 +44,20 @@ public class Clicker : MonoBehaviour
         score += clickValue;
         totalClicks++;
 
+        
+        audioSource.PlayOneShot(clickSound);
+
         clickTimestamps.Enqueue(Time.time);
 
         FindObjectOfType<CPSCounter>()?.RegisterClick();
+
+        UpdateUI();
+    }
+
+    public void OnUpgrade()
+    {
+        audioSource.PlayOneShot(upgradeSound);
+
 
         UpdateUI();
     }
@@ -53,7 +77,7 @@ public class Clicker : MonoBehaviour
         scoreText.text = "Монети: " + score;
 
         statsText.text =
-            "📊 Статистика:\n" +
+            " Статистика:\n" +
             "- Всього кліків: " + totalClicks + "\n" +
             "- Всього монет: " + score + "\n" +
             "- Середній CPS: " + averageCPS.ToString("F2") + "\n" +
