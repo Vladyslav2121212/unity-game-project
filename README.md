@@ -37,7 +37,8 @@ TODO
 
   Демонстрація гри
 
-![GIF]
+![GIF](media/demo.gif)
+
 
 
 
